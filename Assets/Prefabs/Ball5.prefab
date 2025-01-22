@@ -8,10 +8,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3569659382533467166, guid: b18eaea5215bf48cb969f52023dd683c, type: 3}
+      propertyPath: maxSpeed
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -3569659382533467166, guid: b18eaea5215bf48cb969f52023dd683c, type: 3}
+      propertyPath: minSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -3569659382533467166, guid: b18eaea5215bf48cb969f52023dd683c, type: 3}
+      propertyPath: secondsToMaxSpeed
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4483946461959780707, guid: b18eaea5215bf48cb969f52023dd683c, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -8487396936026994761, guid: 036bfbb1b6ac0475ea6f482e309269ac, type: 3}
+    - target: {fileID: 5077771167360065106, guid: b18eaea5215bf48cb969f52023dd683c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077771167360065106, guid: b18eaea5215bf48cb969f52023dd683c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077771167360065106, guid: b18eaea5215bf48cb969f52023dd683c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.22
+      objectReference: {fileID: 0}
     - target: {fileID: 5077771167360065106, guid: b18eaea5215bf48cb969f52023dd683c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
