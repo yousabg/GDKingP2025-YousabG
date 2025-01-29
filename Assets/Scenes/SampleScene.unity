@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 238653014}
   - component: {fileID: 238653013}
   m_Layer: 5
-  m_Name: Panel (1)
+  m_Name: TimerPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -290,7 +290,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -273, y: 166.3}
+  m_AnchoredPosition: {x: -273.00003, y: 166.3}
   m_SizeDelta: {x: -645.17, y: -354.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &238653013
@@ -714,8 +714,9 @@ GameObject:
   - component: {fileID: 661022929}
   - component: {fileID: 661022931}
   - component: {fileID: 661022930}
+  - component: {fileID: 661022932}
   m_Layer: 5
-  m_Name: textHeader
+  m_Name: Timer (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -839,6 +840,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 661022928}
   m_CullTransparentMesh: 1
+--- !u!114 &661022932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661022928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a887d9bf8b4eb48c2842189739a7adf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &687292571
 GameObject:
   m_ObjectHideFlags: 0
@@ -2392,7 +2405,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -273, y: 114.9}
+  m_AnchoredPosition: {x: -273.00003, y: 114.9}
   m_SizeDelta: {x: -645.17, y: -354.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1869419573
@@ -2593,6 +2606,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -787445607834317458, guid: c69ea3af88aa44446a2fd445d667d7b2, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1237615370563499902, guid: c69ea3af88aa44446a2fd445d667d7b2, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -2615,23 +2632,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3911787763403908464, guid: c69ea3af88aa44446a2fd445d667d7b2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3911787763403908464, guid: c69ea3af88aa44446a2fd445d667d7b2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3911787763403908464, guid: c69ea3af88aa44446a2fd445d667d7b2, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3911787763403908464, guid: c69ea3af88aa44446a2fd445d667d7b2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.1
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3911787763403908464, guid: c69ea3af88aa44446a2fd445d667d7b2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.02
+      value: 1.64
       objectReference: {fileID: 0}
     - target: {fileID: 3911787763403908464, guid: c69ea3af88aa44446a2fd445d667d7b2, type: 3}
       propertyPath: m_LocalPosition.z
