@@ -23,6 +23,7 @@ public class BallBehavior : MonoBehaviour
     public float timeLaunchStart;
 
     Rigidbody2D body;
+    public bool rerouting;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,6 +38,9 @@ public class BallBehavior : MonoBehaviour
     public void initialPosition() {
         body = GetComponent<Rigidbody2D>();
         body.position = getRandomPosition();
+        targetPosition = getRandomPosition();
+        launching = false;
+        rerouting = true;
     }
 
     // Update is called once per frame
@@ -66,7 +70,7 @@ public class BallBehavior : MonoBehaviour
 
             currentSpeed = currentSpeed * Time.deltaTime;
             Vector2 newPosition = Vector2.MoveTowards(currentPos, targetPosition, currentSpeed);
-            transform.position = newPosition;
+            body.MovePosition(newPosition);
         } else {
             if (launching == true) {
                 startCooldown();
@@ -77,6 +81,27 @@ public class BallBehavior : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) {
         Debug.Log(this + " Collided with: " + collision.gameObject.name);
+        if (collision.gameObject.tag == "Wall") {
+            targetPosition = getRandomPosition();
+        }
+        if (collision.gameObject.tag == "Ball") {
+            Reroute(collision);
+        }
+    }
+
+    public void Reroute(Collision2D collision) {
+        GameObject otherBall = collision.gameObject;
+        if (rerouting == true) {
+            otherBall.GetComponent<BallBehavior>().rerouting = false;
+            Rigidbody2D ballBody = otherBall.GetComponent<Rigidbody2D>();
+            Vector2 contact = collision.GetContact(0).normal;
+            targetPosition = Vector2.Reflect(targetPosition, contact).normalized;
+            launching = false;
+            float separationDistance = 0.1f;
+            ballBody.position += contact * separationDistance;
+        } else {
+            rerouting = true;
+        }
     }
 
     Vector2 getRandomPosition() {

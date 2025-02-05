@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1382865987584221487}
   m_Layer: 0
   m_Name: Pin1
-  m_TagString: Untagged
+  m_TagString: Pin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3139d4326630c4bf59300d212ea93b55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 5
   newPosition: {x: 0, y: 0}
   mousePosG: {x: 0, y: 0, z: 0}
 --- !u!60 &-1190003106732516367
