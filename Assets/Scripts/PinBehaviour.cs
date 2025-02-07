@@ -1,8 +1,19 @@
 using UnityEngine;
+using UnityEngine.XR;
 
 public class PinBehaviour : MonoBehaviour
 {
-    public float speed = 2.0f;
+    public float speed;
+    public float start;
+    public float baseSpeed = 15.0f;
+    public float dashSpeed = 25.0f;
+    public float dashDuration = 0.3f;
+    public bool dashing;
+
+    public static float cooldownRate = 1.0f;
+    public float endLastDash;
+    public static float cooldown = 0.0f;
+
     public Vector2 newPosition;
     public Vector3 mousePosG;
     Camera cam;
@@ -13,14 +24,35 @@ public class PinBehaviour : MonoBehaviour
     {
         cam = Camera.main;
         body = GetComponent<Rigidbody2D>();
+        dashing = false;
+    }
+
+    private void Dash() {
+        if (dashing == true) {
+            float currenttime = Time.time;
+            float timeDashing = currenttime - start;
+            if (timeDashing > dashDuration) {
+                dashing = false;
+                speed = baseSpeed;
+                cooldown = cooldownRate;
+            } 
+        } else {
+            cooldown = cooldown - Time.deltaTime;
+            if (cooldown < 0.0) {
+                cooldown = 0.0f;
+            }
+            if (cooldown == 0.0 && Input.GetMouseButtonDown(0)) {
+                dashing = true;
+                speed = dashSpeed;
+                start = Time.time;
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // mousePosG = cam.ScreenToWorldPoint(Input.mousePosition);
-        // newPosition = Vector2.MoveTowards(transform.position, mousePosG, speed * Time.fixedDeltaTime);
-        // transform.position = newPosition;
+        Dash();
     }
 
     void FixedUpdate()
