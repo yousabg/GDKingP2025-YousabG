@@ -25,6 +25,8 @@ public class PinBehaviour : MonoBehaviour
         cam = Camera.main;
         body = GetComponent<Rigidbody2D>();
         dashing = false;
+        Vector2 start = new Vector2(0, 0);
+        body.MovePosition(start);
     }
 
     private void Dash() {
@@ -67,6 +69,7 @@ public class PinBehaviour : MonoBehaviour
         Debug.Log("Collided with " + collided);
         if (collided == "Ball" || collided == "Wall") {
             Debug.Log("Game Over");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
         }
     }
 }

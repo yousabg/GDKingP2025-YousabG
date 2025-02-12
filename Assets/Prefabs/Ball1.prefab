@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 7492880125390849228}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.59, y: 3.15, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalPosition: {x: -7.59, y: 3.15, z: -0.1}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7492880125390849228}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31aa7ae8891e843bcbcc4412eb5ecbce, type: 3}
   m_Name: 
@@ -112,14 +112,15 @@ MonoBehaviour:
   secondsToMaxSpeed: 10
   target: {fileID: 0}
   minLaunchSpeed: 2
-  maxLaunchSpeed: 14
-  minTimeToLaunch: 0
-  maxtimeToLaunch: 0
+  maxLaunchSpeed: 8
+  minTimeToLaunch: 2
+  maxtimeToLaunch: 5
   cooldown: 5
   launching: 1
   launchDuration: 10
   timeLastLaunch: 0
   timeLaunchStart: 0
+  rerouting: 0
 --- !u!50 &3985511758882075653
 Rigidbody2D:
   serializedVersion: 5

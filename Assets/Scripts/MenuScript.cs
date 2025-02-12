@@ -17,4 +17,12 @@ public class MenuScript : MonoBehaviour
     public void gotoGame() {
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGame");
     }
+
+    public void gotoMenu() {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
+
+    public void gotoCharacterSelection() {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("CharacterSelectionMenu");
+    }
 }

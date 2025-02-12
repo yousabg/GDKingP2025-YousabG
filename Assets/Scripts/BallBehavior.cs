@@ -143,4 +143,16 @@ public class BallBehavior : MonoBehaviour
         timeLastLaunch = Time.time;
         launching = false;
     }
+
+
+    public void setBounds(float miX, float maX, float miY, float maY) {
+        minX = miX;
+        maxX = maX;
+        minY = miY;
+        maxY = maY;
+    }
+
+    public void setTarget(GameObject pin) {
+        target = pin;
+    }
 }
