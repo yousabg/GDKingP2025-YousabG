@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3569659382533467166, guid: b18eaea5215bf48cb969f52023dd683c, type: 3}
       propertyPath: maxSpeed
-      value: 13
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -3569659382533467166, guid: b18eaea5215bf48cb969f52023dd683c, type: 3}
       propertyPath: minSpeed
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -3569659382533467166, guid: b18eaea5215bf48cb969f52023dd683c, type: 3}
       propertyPath: secondsToMaxSpeed
@@ -26,15 +26,15 @@ PrefabInstance:
       objectReference: {fileID: -3079722678121271134, guid: 01fb9cf7c40304bbbb58bf4c76fa4f73, type: 3}
     - target: {fileID: 5077771167360065106, guid: b18eaea5215bf48cb969f52023dd683c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.15
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 5077771167360065106, guid: b18eaea5215bf48cb969f52023dd683c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.15
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 5077771167360065106, guid: b18eaea5215bf48cb969f52023dd683c, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.15
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 5077771167360065106, guid: b18eaea5215bf48cb969f52023dd683c, type: 3}
       propertyPath: m_LocalPosition.x
