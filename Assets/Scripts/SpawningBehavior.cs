@@ -11,8 +11,10 @@ public class SpawningBehavior : MonoBehaviour
     public float maxX;
     public float minY;
     public float maxY;
+    public Pins pinsDB;
     void Start()
     {
+        spawnPin();
         spawnBall();
     }
 
@@ -38,5 +40,11 @@ public class SpawningBehavior : MonoBehaviour
             ballBehavior.initialPosition();
         }
         startTime = Time.time;
+    }
+
+    void spawnPin()
+    {
+        targetObject = Instantiate(pinsDB.getPin(CharacterManager.selection).prefab,
+            new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
     }
 }
