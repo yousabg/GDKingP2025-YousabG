@@ -14,6 +14,8 @@ public class CharacterManager : MonoBehaviour
         nameLabel.SetText(current.name);
     }
     public void next() {
+        AudioSource audioSource = GetComponentInChildren<AudioSource>();
+        audioSource.Play();
         int numberPins = pinsDB.getCount();
         if (selection < numberPins - 1) {
             selection = selection + 1;
@@ -23,6 +25,8 @@ public class CharacterManager : MonoBehaviour
         updateCharacter();
     }
     public void previous() {
+        AudioSource audioSource = GetComponentInChildren<AudioSource>();
+        audioSource.Play();
         if (selection > 0) {
             selection = selection - 1;
         } else {

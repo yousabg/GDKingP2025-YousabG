@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.XR;
+using System.Collections;
 
 public class PinBehaviour : MonoBehaviour
 {
@@ -19,14 +20,14 @@ public class PinBehaviour : MonoBehaviour
     Camera cam;
 
     Rigidbody2D body;
+    public AudioSource[] audioSources;
 
     void Start()
     {
         cam = Camera.main;
         body = GetComponent<Rigidbody2D>();
         dashing = false;
-        Vector2 start = new Vector2(0, 0);
-        body.MovePosition(start);
+        audioSources = GetComponents<AudioSource>();
     }
 
     private void Dash() {
@@ -47,6 +48,10 @@ public class PinBehaviour : MonoBehaviour
                 dashing = true;
                 speed = dashSpeed;
                 start = Time.time;
+                if (audioSources[1].isPlaying) {
+                    audioSources[1].Stop();
+                }
+                audioSources[1].Play();
             }
         }
     }
@@ -69,7 +74,13 @@ public class PinBehaviour : MonoBehaviour
         Debug.Log("Collided with " + collided);
         if (collided == "Ball" || collided == "Wall") {
             Debug.Log("Game Over");
-            UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
+            StartCoroutine(WaitForSoundAndTransition("GameOver"));
         }
+    }
+
+    private IEnumerator WaitForSoundAndTransition(string sceneName) {
+        audioSources[0].Play();
+        yield return new WaitForSeconds(audioSources[0].clip.length);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 }

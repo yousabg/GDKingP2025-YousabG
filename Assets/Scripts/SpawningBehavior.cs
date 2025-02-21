@@ -1,4 +1,4 @@
-using UnityEngine;
+    using UnityEngine;
 
 public class SpawningBehavior : MonoBehaviour
 {
@@ -12,9 +12,12 @@ public class SpawningBehavior : MonoBehaviour
     public float minY;
     public float maxY;
     public Pins pinsDB;
+    public GameObject originalBall; 
     void Start()
     {
         spawnPin();
+        BallBehavior orig = originalBall.GetComponent<BallBehavior>();
+        orig.setTarget(targetObject);
         spawnBall();
     }
 
