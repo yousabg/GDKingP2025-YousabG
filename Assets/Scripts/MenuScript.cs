@@ -16,6 +16,7 @@ public class MenuScript : MonoBehaviour
     }
 
     public void gotoGame() {
+        TextBehaviour.countdownFinished = false;
         StartCoroutine(WaitForSoundAndTransition("MainGame"));
     }
 

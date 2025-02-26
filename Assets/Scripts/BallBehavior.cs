@@ -49,33 +49,35 @@ public class BallBehavior : MonoBehaviour
     }
 
     void FixedUpdate() {
-        body = GetComponent<Rigidbody2D>();
-        if (onCooldown() == false) {
-            launch();
-        }
-        Vector2 currentPos = body.position;
-        float distance = Vector2.Distance(currentPos, targetPosition);
-        if (distance > 0.1) {
-            float difficulty = getDifficultyPercentage();
-            float currentSpeed;
-            if (launching == true) {
-                float launchingForHowLong = Time.time - timeLaunchStart;
-                if (launchingForHowLong > launchDuration) {
+        if (TextBehaviour.countdownFinished) {
+            body = GetComponent<Rigidbody2D>();
+            if (onCooldown() == false) {
+                launch();
+            }
+            Vector2 currentPos = body.position;
+            float distance = Vector2.Distance(currentPos, targetPosition);
+            if (distance > 0.1) {
+                float difficulty = getDifficultyPercentage();
+                float currentSpeed;
+                if (launching == true) {
+                    float launchingForHowLong = Time.time - timeLaunchStart;
+                    if (launchingForHowLong > launchDuration) {
+                        startCooldown();
+                    }
+                    currentSpeed = Mathf.Lerp(minLaunchSpeed, maxLaunchSpeed, difficulty);
+                } else {
+                    currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, difficulty);
+                }
+
+                currentSpeed = currentSpeed * Time.deltaTime;
+                Vector2 newPosition = Vector2.MoveTowards(currentPos, targetPosition, currentSpeed);
+                body.MovePosition(newPosition);
+            } else {
+                if (launching == true) {
                     startCooldown();
                 }
-                currentSpeed = Mathf.Lerp(minLaunchSpeed, maxLaunchSpeed, difficulty);
-            } else {
-                currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, difficulty);
+                targetPosition = getRandomPosition();
             }
-
-            currentSpeed = currentSpeed * Time.deltaTime;
-            Vector2 newPosition = Vector2.MoveTowards(currentPos, targetPosition, currentSpeed);
-            body.MovePosition(newPosition);
-        } else {
-            if (launching == true) {
-                startCooldown();
-            }
-            targetPosition = getRandomPosition();
         }
     }
 
@@ -107,6 +109,12 @@ public class BallBehavior : MonoBehaviour
     Vector2 getRandomPosition() {
         float randomX = Random.Range(minX, maxX);
         float randomY = Random.Range(minY, maxY);
+
+        float minDistanceFromZero = 3.0f;
+        while (Mathf.Abs(randomX) < minDistanceFromZero && Mathf.Abs(randomY) < minDistanceFromZero) {
+            randomX = Random.Range(minX, maxX);
+            randomY = Random.Range(minY, maxY);
+        }
         Vector2 v = new Vector2(randomX, randomY);
 
         return v;

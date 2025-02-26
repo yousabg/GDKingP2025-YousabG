@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.XR;
 using System.Collections;
+using TMPro;
+using System.Threading;
 
 public class PinBehaviour : MonoBehaviour
 {
@@ -22,6 +24,7 @@ public class PinBehaviour : MonoBehaviour
     Rigidbody2D body;
     public AudioSource[] audioSources;
 
+    
     void Start()
     {
         cam = Camera.main;
@@ -59,14 +62,25 @@ public class PinBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Dash();
+        if (TextBehaviour.countdownFinished)
+        {
+            Dash();
+        }
+        else
+        {
+            transform.position = Vector3.zero;
+        }
     }
 
     void FixedUpdate()
     {
-        mousePosG = cam.ScreenToWorldPoint(Input.mousePosition);
-        newPosition = Vector2.MoveTowards(body.position, mousePosG, speed * Time.fixedDeltaTime);
-        body.MovePosition(newPosition);
+        if (TextBehaviour.countdownFinished) {
+            mousePosG = cam.ScreenToWorldPoint(Input.mousePosition);
+            newPosition = Vector2.MoveTowards(body.position, mousePosG, speed * Time.fixedDeltaTime);
+            body.MovePosition(newPosition);
+        } else {
+            transform.position = Vector3.zero;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
