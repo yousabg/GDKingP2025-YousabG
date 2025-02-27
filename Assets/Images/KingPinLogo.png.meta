@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      KingPinLogo_0: -4157298696885185588
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

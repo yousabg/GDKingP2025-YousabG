@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      pin-cyber_0: 5269267252506627341
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
