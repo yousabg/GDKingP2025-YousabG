@@ -8,6 +8,9 @@ TagManager:
   - Wall
   - Pin
   - overlay
+  - Dash
+  - Invincibility
+  - dashOverlay
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BallBehavior : MonoBehaviour
@@ -24,6 +25,8 @@ public class BallBehavior : MonoBehaviour
 
     Rigidbody2D body;
     public bool rerouting;
+    public bool canCollide = false;
+    private SpriteRenderer spriteRenderer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,13 +34,34 @@ public class BallBehavior : MonoBehaviour
         // secondsToMaxSpeed = 30;
         // minSpeed = 2.0f;
         // maxSpeed = 5.0f;
+        spriteRenderer = GetComponent<SpriteRenderer>();
         initialPosition();
+        StartCoroutine(OpacityTimer());
+    }
 
+        IEnumerator OpacityTimer()
+    {
+        float timer = 0f;
+        float fadeDuration = 5f;
+        float opacity = 0f;
+
+        while (timer < fadeDuration)
+        {
+            timer += Time.deltaTime;
+            opacity = Mathf.PingPong(timer, 1f); 
+            Color color = spriteRenderer.color;
+            color.a = opacity;
+            spriteRenderer.color = color;
+
+            yield return null;
+        }
+
+        canCollide = true;
     }
 
     public void initialPosition() {
         body = GetComponent<Rigidbody2D>();
-        body.position = getRandomPosition();
+        //body.position = getRandomBallPosition();
         targetPosition = getRandomPosition();
         launching = false;
         rerouting = true;
@@ -82,7 +106,6 @@ public class BallBehavior : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log(this + " Collided with: " + collision.gameObject.name);
         if (collision.gameObject.tag == "Wall") {
             targetPosition = getRandomPosition();
         }
@@ -110,15 +133,49 @@ public class BallBehavior : MonoBehaviour
         float randomX = Random.Range(minX, maxX);
         float randomY = Random.Range(minY, maxY);
 
-        float minDistanceFromZero = 3.0f;
-        while (Mathf.Abs(randomX) < minDistanceFromZero && Mathf.Abs(randomY) < minDistanceFromZero) {
-            randomX = Random.Range(minX, maxX);
-            randomY = Random.Range(minY, maxY);
-        }
         Vector2 v = new Vector2(randomX, randomY);
 
         return v;
     }
+
+    Vector2 getRandomBallPosition() {
+        float randomX, randomY;
+        Vector2 randomPosition;
+        Rigidbody2D targetBody = target.GetComponent<Rigidbody2D>();
+
+        Vector2 targetPosition = targetBody.position;
+
+        bool targetOnLeft = targetPosition.x < (minX + maxX) / 2;
+
+        float minDistanceFromZero = 3.0f;
+
+        if (targetOnLeft) {
+            randomX = Random.Range((minX + maxX) / 2, maxX);
+        } else {
+            randomX = Random.Range(minX, (minX + maxX) / 2);
+        }
+        randomY = Random.Range(minY, maxY);
+        randomPosition = new Vector2(randomX, randomY);
+
+        do {
+            targetOnLeft = targetPosition.x < (minX + maxX) / 2;
+
+            if (targetOnLeft) {
+                randomX = Random.Range((minX + maxX) / 2, maxX);
+            } else {
+                randomX = Random.Range(minX, (minX + maxX) / 2);
+            }
+
+            randomY = Random.Range(minY, maxY);
+            randomPosition = new Vector2(randomX, randomY);
+
+        } while (Mathf.Abs(randomX) < minDistanceFromZero && Mathf.Abs(randomY) < minDistanceFromZero);
+
+
+        return randomPosition;
+    }
+
+
 
     private float getDifficultyPercentage(){
         float difficulty = Mathf.Clamp01(Time.timeSinceLevelLoad / secondsToMaxSpeed );

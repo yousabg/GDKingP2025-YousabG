@@ -23,7 +23,11 @@ public class DashIconBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cooldown = PinBehaviour.cooldown;
+        if (gameObject.tag == "Dash") {
+            cooldown = PinBehaviour.cooldown;
+        } else if (gameObject.tag == "Invincibility") {
+            cooldown = PinBehaviour.invincibilityCooldown;
+        }
         string message = "";
         if (cooldown > 0.0) {
             float fill = cooldown / cooldownRate;

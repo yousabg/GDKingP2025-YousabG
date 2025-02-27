@@ -25,6 +25,11 @@ public class TextBehaviour : MonoBehaviour
         }
 
         highscore = PlayerPrefs.GetFloat("Highscore", 0.0f);
+        if (highscoreText != null) {
+            int minutes = Mathf.FloorToInt(highscore / 60);
+            int seconds = Mathf.FloorToInt(highscore % 60);
+            highscoreText.SetText("Highscore: \n{0:00}:{1:00}", minutes, seconds);
+        }
     }
 
     // Update is called once per frame

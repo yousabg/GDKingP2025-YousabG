@@ -36,7 +36,8 @@ public class SpawningBehavior : MonoBehaviour
         int numVariants = ballVariants.Length;
         if (numVariants > 0) {
             int selection = Random.Range(0, numVariants);
-            newObject = Instantiate(ballVariants[selection], new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+            Vector2 spawnPosition = getRandomBallPosition();
+            newObject = Instantiate(ballVariants[selection], new Vector3(spawnPosition.x, spawnPosition.y, 0.0f), Quaternion.identity);
             BallBehavior ballBehavior = newObject.GetComponent<BallBehavior>();
             ballBehavior.setBounds(minX, maxX, minY, maxY);
             ballBehavior.setTarget(targetObject);
@@ -45,9 +46,45 @@ public class SpawningBehavior : MonoBehaviour
         startTime = Time.time;
     }
 
+        Vector2 getRandomBallPosition() {
+        float randomX, randomY;
+        Vector2 randomPosition;
+        Rigidbody2D targetBody = targetObject.GetComponent<Rigidbody2D>();
+
+        Vector2 targetPosition = targetBody.position;
+
+        bool targetOnLeft = targetPosition.x < (minX + maxX) / 2;
+
+        float minDistanceFromCenter = 3.0f;
+
+        if (targetOnLeft) {
+        randomX = Random.Range((minX + maxX) / 2 + minDistanceFromCenter, maxX); // Spawn on the right
+        } else {
+            randomX = Random.Range(minX, (minX + maxX) / 2 - minDistanceFromCenter); // Spawn on the left
+        }
+
+        randomY = Random.Range(minY, maxY);
+        randomPosition = new Vector2(randomX, randomY);
+
+        while (Mathf.Abs(randomX) < minDistanceFromCenter && Mathf.Abs(randomY) < minDistanceFromCenter) {
+            if (targetOnLeft) {
+                randomX = Random.Range((minX + maxX) / 2 + minDistanceFromCenter, maxX); // Spawn on the right
+            } else {
+                randomX = Random.Range(minX, (minX + maxX) / 2 - minDistanceFromCenter); // Spawn on the left
+            }
+            randomY = Random.Range(minY, maxY);
+            randomPosition = new Vector2(randomX, randomY);
+        }
+
+        Debug.Log($"Ball Spawn Position: {randomPosition}");
+
+        return randomPosition;
+    }
+
     void spawnPin()
     {
         targetObject = Instantiate(pinsDB.getPin(CharacterManager.selection).prefab,
             new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+        PinBehaviour pinBehaviour = targetObject.GetComponent<PinBehaviour>();
     }
 }
